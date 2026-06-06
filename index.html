@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnapSell — Foto Produk, Konten Siap Jual</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg:#ffffff;--bg2:#f5f5f5;--bg3:#ffffff;
+      --ink:#1a1a1a;--ink2:#555555;--ink3:#999999;
+      --accent:#4b5694;--accent-rgb:75,86,148;--accent-h:#384175;--gold:#b47915;--success:#1e7a44;
+      --white:#ffffff;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
+      --shadow:0 2px 16px rgba(0,0,0,0.05);--shadow2:0 8px 40px rgba(0,0,0,0.09);
+      --ig:#c13584;--toped:#3bab49;--shopee:#ee4d2d;--tiktok:#333333;
+      --r:14px;--r2:10px;
+      --font-display:'Inter',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      --font-body:'Inter',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    }
+    [data-theme="dark"]{
+      --bg:#0a0e29;--bg2:#111844;--bg3:#1b2257;
+      --ink:#eae0cf;--ink2:#b0bcd6;--ink3:#7288ae;
+      --white:#111844;--border:rgba(234,224,207,0.1);--border2:rgba(234,224,207,0.18);
+      --shadow:0 2px 16px rgba(0,0,0,0.4);--shadow2:0 8px 40px rgba(0,0,0,0.5);
+      --accent:#7288ae;--accent-rgb:114,136,174;--accent-h:#8fa4cb;
+    }
+  </style>
+  <link rel="stylesheet" href="snapsell.css?v=20260605194700">
+</head>
+
+<body>
+
+  <!-- =================== LANDING =================== -->
+  <div id="landing">
+    <nav class="nav">
+      <span class="logo">Snap<em>Sell</em></span>
+      <div class="nav-r">
+        <button class="btn-ghost" onclick="openHistory()">📋 Riwayat</button>
+        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+        <button class="btn-primary" onclick="goToApp()">Mulai →</button>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div>
+        <div class="hero-tag">AI untuk UMKM Indonesia</div>
+        <h1 class="hero-title">Foto Produk →<br><em>Konten Siap Jual</em></h1>
+        <p class="hero-sub">Upload foto produkmu, biarkan AI menghasilkan caption Instagram, deskripsi Tokopedia &
+          Shopee, skrip TikTok, dan rekomendasi harga — dalam hitungan detik.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="goToApp()">✨ Coba Sekarang Gratis</button>
+          <button class="btn-ghost" onclick="openHistory()">📋 Riwayat Saya</button>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">4</div>
+            <div class="stat-lbl">Platform sekaligus</div>
+          </div>
+          <div>
+            <div class="stat-num">&lt;30s</div>
+            <div class="stat-lbl">Waktu generate</div>
+          </div>
+          <div>
+            <div class="stat-num">A/B</div>
+            <div class="stat-lbl">Dua versi caption</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="mock-card">
+          <div class="mock-img">🍪</div>
+          <div class="mock-body">
+            <div class="mock-plat">
+              <div class="mock-dot"></div>Instagram Caption
+            </div>
+            <div class="mock-txt">✨ Hadir lagi! Brownies lembut nan coklat yang bikin nagih. Dibuat fresh tiap hari,
+              tanpa pengawet...</div>
+            <div class="mock-tags"><span class="mock-tag">#brownies</span> <span class="mock-tag">#homemade</span> <span
+                class="mock-tag">#umkm</span></div>
+            <div class="mock-price"><span class="mock-price-lbl">Harga Ideal</span><span class="mock-price-val">Rp
+                35.000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="features">
+      <div class="feat">
+        <div class="feat-icon">📸</div>
+        <div>
+          <h3>Analisis Foto AI</h3>
+          <p>AI baca foto produkmu & buat konten yang spesifik dan akurat</p>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🎯</div>
+        <div>
+          <h3>4 Platform Sekaligus</h3>
+          <p>Instagram, Tokopedia, Shopee & TikTok — tone berbeda tiap platform</p>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">💰</div>
+        <div>
+          <h3>Rekomendasi Harga</h3>
+          <p>Saran harga min, ideal & premium berdasarkan kategori & modal</p>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🔄</div>
+        <div>
+          <h3>A/B Caption</h3>
+          <p>Generate 2 versi per platform, pilih yang paling cocok</p>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📂</div>
+        <div>
+          <h3>Riwayat & Export</h3>
+          <p>Tersimpan otomatis, bisa diexport ke .txt kapan saja</p>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🌙</div>
+        <div>
+          <h3>Dark Mode</h3>
+          <p>Nyaman dipakai siang & malam, preferensi tersimpan</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== APP =================== -->
+  <div id="app">
+    <nav class="app-nav">
+      <span class="logo" onclick="goToLanding()" style="font-size:1.2rem">Snap<em>Sell</em></span>
+      <div class="progress-wrap">
+        <div class="prog-bar">
+          <div class="pb" id="pb1"></div>
+          <div class="pb" id="pb2"></div>
+          <div class="pb" id="pb3"></div>
+        </div>
+        <span class="prog-lbl" id="progLbl">Mulai dengan upload foto</span>
+      </div>
+      <div class="nav-r">
+        <button class="btn-icon" onclick="openHistory()" title="Riwayat">📋</button>
+        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+        <button class="btn-ghost" onclick="goToLanding()" style="font-size:12px;padding:7px 13px">← Beranda</button>
+      </div>
+    </nav>
+
+    <div class="app-body">
+      <!-- LEFT -->
+      <div class="left-col">
+
+        <div class="sec config-sec">
+          <div class="sec-lbl">⚙️ Pengaturan AI</div>
+          <div class="fg" style="display:none;">
+            <div class="api-key-header">
+              <label class="fl">OpenRouter API Key *</label>
+              <a href="https://openrouter.ai" target="_blank" class="api-link">Daftar gratis → openrouter.ai</a>
+            </div>
+            <div class="password-wrapper">
+              <input type="password" class="fi" id="apiKeyInput" placeholder="sk-or-v1-xxxxxxxxxx">
+              <button type="button" class="btn-toggle-pw" onclick="togglePasswordVisibility()">👁️</button>
+            </div>
+          </div>
+          <div class="fg" style="margin-bottom:0">
+            <div class="model-header">
+              <label class="fl">Model AI</label>
+              <span id="modelBadge" class="model-badge">GRATIS</span>
+            </div>
+            <select class="fs" id="modelSelect" onchange="handleModelChange()">
+              <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
+              <option value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B (Gratis)</option>
+              <option value="openai/gpt-4o-mini">GPT-4o Mini (Berbayar)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-lbl"><span class="sec-num">1</span>Foto Produk</div>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" accept="image/*" id="fileInput" onchange="handleFile(event)">
+            <div style="font-size:2rem;margin-bottom:.6rem">📸</div>
+            <p><strong>Klik atau seret foto</strong> ke sini<br><span style="font-size:11px">JPG, PNG, WebP · maks
+                5MB</span></p>
+          </div>
+          <div id="previewWrap" style="display:none">
+            <div class="preview-wrap">
+              <img id="previewImg" src="" alt="Preview">
+              <div class="preview-actions">
+                <button class="prev-btn prev-change" onclick="triggerChange()">Ganti</button>
+                <button class="prev-btn prev-remove" onclick="removeImg()">Hapus</button>
+              </div>
+            </div>
+            <input type="file" accept="image/*" id="fileHidden" onchange="handleFile(event)" style="display:none">
+          </div>
+          <div class="tips-chip" id="tipsChip">💡 Foto dengan pencahayaan baik & latar polos menghasilkan caption lebih
+            akurat.</div>
+          <div class="photo-analysis" id="photoAnalysis"></div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-lbl"><span class="sec-num">2</span>Info Produk</div>
+          <div class="fg">
+            <label class="fl">Nama Produk *</label>
+            <input type="text" class="fi" id="productName" placeholder="cth: Kue Brownies Panggang Original"
+              oninput="updateProg()">
+          </div>
+          <div class="fr">
+            <div class="fg">
+              <label class="fl">Kategori *</label>
+              <select class="fs" id="category" onchange="updateProg()">
+                <option value="">Pilih kategori</option>
+                <option>Makanan &amp; Minuman</option>
+                <option>Fashion &amp; Pakaian</option>
+                <option>Kerajinan Tangan</option>
+                <option>Kecantikan &amp; Perawatan</option>
+                <option>Elektronik &amp; Aksesori</option>
+                <option>Tanaman &amp; Pertanian</option>
+                <option>Peralatan Rumah</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="fl">Modal/unit <span>(opsional)</span></label>
+              <input type="number" class="fi" id="costPrice" placeholder="cth: 25000" min="0">
+            </div>
+          </div>
+          <div class="fg">
+            <label class="fl">Target Pembeli <span>(opsional)</span></label>
+            <input type="text" class="fi" id="target" placeholder="cth: ibu rumah tangga, anak muda">
+          </div>
+          <div class="fg">
+            <label class="fl">Keunggulan Produk <span>(opsional)</span></label>
+            <textarea class="ft" id="keunggulan"
+              placeholder="cth: homemade, tanpa pengawet, cocok untuk hampers, limited edition..."></textarea>
+          </div>
+          <div class="fg">
+            <label class="fl">Tone Konten</label>
+            <select class="fs" id="tone">
+              <option value="friendly">Hangat &amp; Friendly (default)</option>
+              <option value="formal">Formal &amp; Profesional</option>
+              <option value="playful">Playful &amp; Gaul</option>
+              <option value="luxury">Premium &amp; Eksklusif</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec-lbl"><span class="sec-num">3</span>Platform &amp; Opsi</div>
+          <div class="plat-grid">
+            <label class="plat-lbl p-ig on" id="lbl-ig">
+              <input type="checkbox" value="instagram" checked onchange="togglePlat('lbl-ig',this)">
+              <span class="pd"></span>Instagram
+            </label>
+            <label class="plat-lbl p-top on" id="lbl-top">
+              <input type="checkbox" value="tokopedia" checked onchange="togglePlat('lbl-top',this)">
+              <span class="pd"></span>Tokopedia
+            </label>
+            <label class="plat-lbl p-sho on" id="lbl-sho">
+              <input type="checkbox" value="shopee" checked onchange="togglePlat('lbl-sho',this)">
+              <span class="pd"></span>Shopee
+            </label>
+            <label class="plat-lbl p-tik" id="lbl-tik">
+              <input type="checkbox" value="tiktok" onchange="togglePlat('lbl-tik',this)">
+              <span class="pd"></span>TikTok
+            </label>
+          </div>
+          <label class="ab-row">
+            <input type="checkbox" id="abToggle">
+            Generate A/B caption (2 versi per platform)
+          </label>
+        </div>
+
+        <div class="sec" style="border-bottom:none">
+          <button class="btn-gen" id="btnGen" onclick="generate()">
+            <div class="spin" id="spinner"></div>
+            <span id="btnTxt">✨ Generate Konten Sekarang</span>
+          </button>
+          <p style="font-size:10.5px;color:var(--ink3);text-align:center;margin-top:7px;line-height:1.5">Hasil muncul di
+            panel kanan · Tersimpan otomatis ke riwayat</p>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-col" id="rightCol">
+        <div class="empty-state" id="emptyState">
+          <div class="ei">🪄</div>
+          <h2>Siap Generate Konten</h2>
+          <p>Isi info produk di kiri,<br>lalu klik <strong>Generate Konten Sekarang</strong>.</p>
+        </div>
+
+        <div class="export-bar" id="exportBar">
+          <div class="export-info">
+            <h4>Konten siap! 🎉</h4>
+            <p id="exportMeta"></p>
+          </div>
+          <div class="export-btns">
+            <button class="btn-sm" onclick="exportTxt()">⬇ Export .txt</button>
+            <button class="btn-sm accent" onclick="generate()">↺ Ulang</button>
+          </div>
+        </div>
+
+        <div class="price-card" id="priceCard">
+          <div class="price-head">
+            <div class="price-eyebrow">💰 Rekomendasi Harga Jual</div>
+            <span class="price-badge">AI Pricing</span>
+          </div>
+          <div class="price-grid">
+            <div class="price-col">
+              <div class="price-col-lbl">Minimum</div>
+              <div class="price-col-val pv-min" id="priceMin">—</div>
+            </div>
+            <div class="price-col">
+              <div class="price-col-lbl">⭐ Ideal</div>
+              <div class="price-col-val pv-rec" id="priceRec">—</div>
+            </div>
+            <div class="price-col">
+              <div class="price-col-lbl">Premium</div>
+              <div class="price-col-val pv-max" id="priceMax">—</div>
+            </div>
+          </div>
+          <div class="price-margin" id="priceNote"></div>
+        </div>
+
+        <div id="captionCards"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY MODAL -->
+  <div id="historyModal">
+    <div class="hist-box">
+      <div class="hist-head">
+        <h3>📋 Riwayat Generate</h3>
+        <div style="display:flex;gap:6px;align-items:center">
+          <button class="btn-sm accent" onclick="clearHistory()">Hapus Semua</button>
+          <button class="btn-icon" onclick="closeHistory()">✕</button>
+        </div>
+      </div>
+      <div class="hist-body" id="historyList"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="snapsell.js"></script>
+</body>
+
+</html>
