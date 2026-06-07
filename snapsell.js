@@ -3,10 +3,10 @@ const API_BASE = 'https://backend-snap-production-c9a5.up.railway.app';
 
 /* ===== CONSTANTS ===== */
 const PLAT = {
-  instagram:{ label:'Instagram', color:'#C13584', icon:'📷', hint:'Caption · Hashtag · Engagement' },
-  tokopedia:{ label:'Tokopedia', color:'#3BAB49', icon:'🛒', hint:'SEO Marketplace · Deskripsi detail' },
-  shopee:   { label:'Shopee',    color:'#EE4D2D', icon:'🛍️', hint:'Keyword-rich · Poin keunggulan' },
-  tiktok:   { label:'TikTok',   color:'#444',    icon:'🎬', hint:'Skrip video 15-30 detik' }
+  instagram:{ label:'Instagram', color:'#C13584', icon:'#ic-instagram', hint:'Caption · Hashtag · Engagement' },
+  tokopedia:{ label:'Tokopedia', color:'#3BAB49', icon:'#ic-shop',      hint:'SEO Marketplace · Deskripsi detail' },
+  shopee:   { label:'Shopee',    color:'#EE4D2D', icon:'#ic-shop',      hint:'Keyword-rich · Poin keunggulan' },
+  tiktok:   { label:'TikTok',   color:'#555',    icon:'#ic-play',      hint:'Skrip video 15-30 detik' }
 };
 const CHAR_LIMIT = { instagram:2200, tokopedia:3000, shopee:3000, tiktok:1000 };
 
@@ -15,12 +15,16 @@ let imgBase64=null, imgType=null, lastResult=null;
 /* ===== THEME ===== */
 (function(){
   const s=localStorage.getItem('ss-theme');
-  if(s==='dark'){document.documentElement.setAttribute('data-theme','dark');document.querySelectorAll('.theme-btn').forEach(b=>b.textContent='☀️');}
+  if(s==='dark'){
+    document.documentElement.setAttribute('data-theme','dark');
+    document.querySelectorAll('[id^="themeIcon"]').forEach(u=>u.setAttribute('href','#ic-sun'));
+  }
 })();
 function toggleTheme(){
   const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';
   h.setAttribute('data-theme',d?'light':'dark');
-  document.querySelectorAll('.theme-btn').forEach(b=>b.textContent=d?'🌙':'☀️');
+  const href=d?'#ic-moon':'#ic-sun';
+  document.querySelectorAll('[id^="themeIcon"]').forEach(u=>u.setAttribute('href',href));
   localStorage.setItem('ss-theme',d?'light':'dark');
 }
 
@@ -52,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function togglePasswordVisibility() {
   const input = document.getElementById('apiKeyInput');
-  const btn = document.querySelector('.btn-toggle-pw');
+  const icon = document.getElementById('eyeIcon');
   if (!input) return;
   if (input.type === 'password') {
     input.type = 'text';
-    btn.textContent = '🔒';
+    if (icon) icon.querySelector('use').setAttribute('href', '#ic-eye-off');
   } else {
     input.type = 'password';
-    btn.textContent = '👁️';
+    if (icon) icon.querySelector('use').setAttribute('href', '#ic-eye');
   }
 }
 
@@ -180,7 +184,8 @@ async function generate(){
     lastResult={name,cat,plats,parsed,doAB,ts:Date.now()};
     renderResults(plats,parsed,doAB,name);
     saveHist(name,cat,plats,parsed,doAB);
-    showToast('Konten berhasil digenerate! 🎉');
+    showToast('Konten berhasil digenerate!');
+    document.dispatchEvent(new CustomEvent('snapsell:generated'));
   }catch(err){
     showToast('Error: '+(err.message||'Coba lagi'));
     document.getElementById('emptyState').style.display='flex';
@@ -282,7 +287,7 @@ function clearResults(){
 function renderResults(plats,parsed,doAB,name){
   if(parsed.photo_insight&&imgBase64){
     const el=document.getElementById('photoAnalysis');
-    el.innerHTML='<strong>📷 Analisis Foto:</strong> '+parsed.photo_insight;
+    el.innerHTML=`<strong><svg class="ic ic-sm" style="vertical-align:-.12em"><use href="#ic-camera"/></svg> Analisis Foto:</strong> `+parsed.photo_insight;
     el.style.display='block';
   }
   const h=parsed.harga||{};
@@ -303,15 +308,18 @@ function renderResults(plats,parsed,doAB,name){
     const tB=isAB?raw.b:null;
     const card=document.createElement('div');
     card.className='caption-card';card.id='card-'+p;card.style.display='block';
+    const svgIcon=`<svg class="ic ic-sm" style="vertical-align:-.1em"><use href="${meta.icon}"/></svg>`;
     card.innerHTML=`
       <div class="cap-header">
         <div class="cap-plat">
-          <div class="cap-icon" style="background:${meta.color}20">${meta.icon}</div>
+          <div class="cap-icon" style="background:${meta.color}20;color:${meta.color}">${svgIcon}</div>
           <div><div class="cap-name" style="color:${meta.color}">${meta.label}</div><div class="cap-hint">${meta.hint}</div></div>
         </div>
         <div class="cap-actions">
-          ${isAB?`<button class="btn-sm accent" id="pA-${p}" onclick="pickVer('${p}','a')">✓ Pilih A</button><button class="btn-sm" id="pB-${p}" onclick="pickVer('${p}','b')">Pilih B</button>`:''}
-          <button class="btn-sm" id="copy-${p}" onclick="copyCaption('${p}')">Salin</button>
+          ${isAB?`<button class="btn-sm accent" id="pA-${p}" onclick="pickVer('${p}','a')"><svg class="ic ic-sm"><use href="#ic-check"/></svg> A</button><button class="btn-sm" id="pB-${p}" onclick="pickVer('${p}','b')">B</button>`:''}
+          <button class="btn-sm" id="copy-${p}" onclick="copyCaption('${p}')">
+            <svg class="ic ic-sm"><use href="#ic-copy"/></svg> Salin
+          </button>
         </div>
       </div>
       ${isAB?`<div class="cap-tabs"><button class="tab-btn active" id="tab-${p}-a" onclick="switchTab('${p}','a')">Versi A</button><button class="tab-btn" id="tab-${p}-b" onclick="switchTab('${p}','b')">Versi B</button></div>`:''}
@@ -345,7 +353,8 @@ function pickVer(p,v){
   switchTab(p,v);
   ['a','b'].forEach(x=>{
     const b=document.getElementById('p'+x.toUpperCase()+'-'+p);if(!b)return;
-    b.textContent=x===v?'✓ Dipilih':'Pilih '+x.toUpperCase();
+    const checkSvg=`<svg class="ic ic-sm"><use href="#ic-check"/></svg>`;
+    b.innerHTML=x===v?(checkSvg+' Dipilih'):x.toUpperCase();
     b.style.color=x===v?'var(--success)':'';
     b.style.borderColor=x===v?'rgba(30,122,68,.4)':'';
   });
@@ -359,8 +368,12 @@ async function copyCaption(p){
   const btn=document.getElementById('copy-'+p);
   try{
     await navigator.clipboard.writeText(t);
-    btn.textContent='✓ Tersalin';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='Salin';btn.classList.remove('copied');},2200);
+    btn.innerHTML=`<svg class="ic ic-sm"><use href="#ic-check"/></svg> Tersalin`;
+    btn.classList.add('copied');
+    setTimeout(()=>{
+      btn.innerHTML=`<svg class="ic ic-sm"><use href="#ic-copy"/></svg> Salin`;
+      btn.classList.remove('copied');
+    },2200);
   }catch{showToast('Gagal menyalin.');}
 }
 
@@ -401,15 +414,20 @@ function openHistory(){renderHistList();document.getElementById('historyModal').
 function closeHistory(){document.getElementById('historyModal').classList.remove('open');}
 function renderHistList(){
   const hist=getHist();const el=document.getElementById('historyList');
-  if(!hist.length){el.innerHTML='<div style="padding:2rem;text-align:center;color:var(--ink3);font-size:13px">Belum ada riwayat.</div>';return;}
+  if(!hist.length){
+    el.innerHTML='<div style="padding:2rem;text-align:center;color:var(--ink3);font-size:13px">Belum ada riwayat.</div>';
+    return;
+  }
   el.innerHTML=hist.map(h=>`
     <div class="hist-item" onclick="loadHist(${h.id})">
-      <div class="hist-thumb">${h.thumb?`<img src="${h.thumb}" alt="">`:'📦'}</div>
+      <div class="hist-thumb">${h.thumb?`<img src="${h.thumb}" alt="">`:`<svg class="ic" style="opacity:.4"><use href="#ic-folder"/></svg>`}</div>
       <div style="flex:1;min-width:0">
         <div class="hist-name">${h.name}</div>
         <div class="hist-meta">${h.cat} · ${h.plats.length} platform · ${new Date(h.ts).toLocaleDateString('id-ID')}</div>
       </div>
-      <button class="hist-del" onclick="delHist(event,${h.id})">✕</button>
+      <button class="hist-del" onclick="delHist(event,${h.id})" title="Hapus">
+        <svg class="ic ic-sm"><use href="#ic-trash"/></svg>
+      </button>
     </div>`).join('');
 }
 function loadHist(id){
@@ -434,12 +452,16 @@ document.getElementById('historyModal').addEventListener('click',function(e){if(
 
 /* ===== LOADING ===== */
 function setLoad(on, customText){
-  const btn=document.getElementById('btnGen'),sp=document.getElementById('spinner'),t=document.getElementById('btnTxt');
-  btn.disabled=on;sp.style.display=on?'block':'none';
+  const btn=document.getElementById('btnGen'),sp=document.getElementById('spinner');
+  const t=document.getElementById('btnTxt');
+  const genIcon=document.getElementById('genIcon');
+  btn.disabled=on;
+  sp.style.display=on?'block':'none';
+  if(genIcon) genIcon.style.display=on?'none':'inline-block';
   if (on) {
     t.textContent = customText || 'Sedang generate...';
   } else {
-    t.textContent = '✨ Generate Konten Sekarang';
+    t.textContent = 'Generate Konten Sekarang';
   }
 }
 
@@ -460,7 +482,9 @@ function typewrite(el,text,speed=5){
 /* ===== TOAST ===== */
 let toastTimer=null;
 function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  const t=document.getElementById('toast');
+  t.innerHTML=msg; // allow HTML so SVG icons can be passed
+  t.classList.add('show');
   clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
 }
 

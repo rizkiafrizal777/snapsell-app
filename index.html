@@ -6,7 +6,9 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#4b5694">
+  <meta name="description" content="Upload foto produkmu, biarkan AI menghasilkan caption Instagram, deskripsi Tokopedia & Shopee, skrip TikTok, dan rekomendasi harga.">
   <title>SnapSell — Foto Produk, Konten Siap Jual</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -31,19 +33,194 @@
       --accent:#7288ae;--accent-rgb:114,136,174;--accent-h:#8fa4cb;
     }
   </style>
-  <link rel="stylesheet" href="snapsell.css?v=20260605194700">
+  <link rel="stylesheet" href="snapsell.css?v=20260607200000">
 </head>
 
 <body>
+
+  <!-- SVG Icon Sprites -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <!-- history / clipboard -->
+    <symbol id="ic-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+      <rect x="9" y="3" width="6" height="4" rx="1" ry="1"/>
+      <line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>
+    </symbol>
+    <!-- moon -->
+    <symbol id="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </symbol>
+    <!-- sun -->
+    <symbol id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </symbol>
+    <!-- arrow right -->
+    <symbol id="ic-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+    </symbol>
+    <!-- arrow left -->
+    <symbol id="ic-arrow-l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+    </symbol>
+    <!-- camera -->
+    <symbol id="ic-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+      <circle cx="12" cy="13" r="4"/>
+    </symbol>
+    <!-- target / crosshair -->
+    <symbol id="ic-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+    </symbol>
+    <!-- dollar / price -->
+    <symbol id="ic-price" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+    </symbol>
+    <!-- refresh / repeat -->
+    <symbol id="ic-repeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+      <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+    </symbol>
+    <!-- folder -->
+    <symbol id="ic-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+    </symbol>
+    <!-- sparkles / magic wand -->
+    <symbol id="ic-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+    </symbol>
+    <!-- wand (generate) -->
+    <symbol id="ic-wand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="3" x2="19" y2="17"/><path d="M4.5 1.5s.5 2 2 3.5c1.5 1.5 3.5 2 3.5 2"/>
+      <path d="M10 4s-.5 2 1 3.5c1.5 1.5 3.5 1 3.5 1"/><circle cx="19.5" cy="17.5" r="3.5"/>
+    </symbol>
+    <!-- zap / generate -->
+    <symbol id="ic-zap" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </symbol>
+    <!-- upload / image -->
+    <symbol id="ic-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+      <circle cx="8.5" cy="8.5" r="1.5"/>
+      <polyline points="21 15 16 10 5 21"/>
+    </symbol>
+    <!-- settings / gear -->
+    <symbol id="ic-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </symbol>
+    <!-- copy -->
+    <symbol id="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </symbol>
+    <!-- check -->
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"/>
+    </symbol>
+    <!-- download -->
+    <symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+    </symbol>
+    <!-- x / close -->
+    <symbol id="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </symbol>
+    <!-- trash -->
+    <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+      <path d="M10 11v6"/><path d="M14 11v6"/>
+      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+    </symbol>
+    <!-- eye -->
+    <symbol id="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </symbol>
+    <!-- eye off -->
+    <symbol id="ic-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+      <line x1="1" y1="1" x2="23" y2="23"/>
+    </symbol>
+    <!-- lightbulb -->
+    <symbol id="ic-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/>
+      <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>
+    </symbol>
+    <!-- magic wand (empty state) -->
+    <symbol id="ic-magic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 4V2m0 14v-2M8 9H2m14 0h-2M13.7 6.3l-1.4 1.4M10.7 9.3l-1.4 1.4M13.7 11.7l-1.4-1.4M10.7 6.7L9.3 5.3"/>
+      <path d="m5 21 9-9"/>
+    </symbol>
+    <!-- info -->
+    <symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+    </symbol>
+    <!-- party / celebrate -->
+    <symbol id="ic-party" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01M22 8h.01M15 2h.01M22 20h.01M22 2l-2.24.75a2.9 2.9 0 0 0-1.96 3.12v0c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/>
+      <path d="M5 3 3.5 7.5"/><path d="m18 8-1.5 4.5"/><path d="M4 12l8.5-8.5c3-3 6.5.5 6 6 4-3 7.5 0 4 4.5l-1.5 1.5-9 1"/>
+    </symbol>
+    <!-- star -->
+    <symbol id="ic-star" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </symbol>
+    <!-- coin -->
+    <symbol id="ic-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><path d="M12 6v2m0 8v2"/><path d="M15 9.5a3 3 0 0 0-3-1.5 3 3 0 1 0 0 6 3 3 0 0 0 3-1.5"/>
+    </symbol>
+    <!-- Instagram brand-like -->
+    <symbol id="ic-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+    </symbol>
+    <!-- shop bag (Tokopedia/Shopee) -->
+    <symbol id="ic-shop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 0 1-8 0"/>
+    </symbol>
+    <!-- play / tiktok-like -->
+    <symbol id="ic-play" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="5 3 19 12 5 21 5 3"/>
+    </symbol>
+    <!-- chart / analytics -->
+    <symbol id="ic-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+      <line x1="2" y1="20" x2="22" y2="20"/>
+    </symbol>
+    <!-- phone -->
+    <symbol id="ic-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+      <line x1="12" y1="18" x2="12.01" y2="18"/>
+    </symbol>
+    <!-- hamburger menu -->
+    <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </symbol>
+  </svg>
 
   <!-- =================== LANDING =================== -->
   <div id="landing">
     <nav class="nav">
       <span class="logo">Snap<em>Sell</em></span>
       <div class="nav-r">
-        <button class="btn-ghost" onclick="openHistory()">📋 Riwayat</button>
-        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
-        <button class="btn-primary" onclick="goToApp()">Mulai →</button>
+        <button class="btn-ghost" onclick="openHistory()">
+          <svg class="ic"><use href="#ic-history"/></svg>
+          <span class="btn-label">Riwayat</span>
+        </button>
+        <button class="theme-btn" onclick="toggleTheme()" title="Ganti tema" id="themeBtn">
+          <svg class="ic"><use href="#ic-moon" id="themeIcon"/></svg>
+        </button>
+        <button class="btn-primary" onclick="goToApp()">
+          Mulai
+          <svg class="ic"><use href="#ic-arrow-r"/></svg>
+        </button>
       </div>
     </nav>
 
@@ -54,8 +231,14 @@
         <p class="hero-sub">Upload foto produkmu, biarkan AI menghasilkan caption Instagram, deskripsi Tokopedia &
           Shopee, skrip TikTok, dan rekomendasi harga — dalam hitungan detik.</p>
         <div class="hero-cta">
-          <button class="btn-primary" onclick="goToApp()">✨ Coba Sekarang Gratis</button>
-          <button class="btn-ghost" onclick="openHistory()">📋 Riwayat Saya</button>
+          <button class="btn-primary" onclick="goToApp()">
+            <svg class="ic"><use href="#ic-zap"/></svg>
+            Coba Sekarang Gratis
+          </button>
+          <button class="btn-ghost" onclick="openHistory()">
+            <svg class="ic"><use href="#ic-history"/></svg>
+            Riwayat Saya
+          </button>
         </div>
         <div class="hero-stats">
           <div>
@@ -74,7 +257,9 @@
       </div>
       <div class="hero-visual">
         <div class="mock-card">
-          <div class="mock-img">🍪</div>
+          <div class="mock-img">
+            <svg class="ic" style="width:3.5rem;height:3.5rem;opacity:.6"><use href="#ic-camera"/></svg>
+          </div>
           <div class="mock-body">
             <div class="mock-plat">
               <div class="mock-dot"></div>Instagram Caption
@@ -93,45 +278,57 @@
 
     <div class="features">
       <div class="feat">
-        <div class="feat-icon">📸</div>
+        <div class="feat-icon">
+          <svg class="ic"><use href="#ic-camera"/></svg>
+        </div>
         <div>
           <h3>Analisis Foto AI</h3>
-          <p>AI baca foto produkmu & buat konten yang spesifik dan akurat</p>
+          <p>AI baca foto produkmu &amp; buat konten yang spesifik dan akurat</p>
         </div>
       </div>
       <div class="feat">
-        <div class="feat-icon">🎯</div>
+        <div class="feat-icon">
+          <svg class="ic"><use href="#ic-target"/></svg>
+        </div>
         <div>
           <h3>4 Platform Sekaligus</h3>
-          <p>Instagram, Tokopedia, Shopee & TikTok — tone berbeda tiap platform</p>
+          <p>Instagram, Tokopedia, Shopee &amp; TikTok — tone berbeda tiap platform</p>
         </div>
       </div>
       <div class="feat">
-        <div class="feat-icon">💰</div>
+        <div class="feat-icon">
+          <svg class="ic"><use href="#ic-price"/></svg>
+        </div>
         <div>
           <h3>Rekomendasi Harga</h3>
-          <p>Saran harga min, ideal & premium berdasarkan kategori & modal</p>
+          <p>Saran harga min, ideal &amp; premium berdasarkan kategori &amp; modal</p>
         </div>
       </div>
       <div class="feat">
-        <div class="feat-icon">🔄</div>
+        <div class="feat-icon">
+          <svg class="ic"><use href="#ic-repeat"/></svg>
+        </div>
         <div>
           <h3>A/B Caption</h3>
           <p>Generate 2 versi per platform, pilih yang paling cocok</p>
         </div>
       </div>
       <div class="feat">
-        <div class="feat-icon">📂</div>
+        <div class="feat-icon">
+          <svg class="ic"><use href="#ic-folder"/></svg>
+        </div>
         <div>
-          <h3>Riwayat & Export</h3>
+          <h3>Riwayat &amp; Export</h3>
           <p>Tersimpan otomatis, bisa diexport ke .txt kapan saja</p>
         </div>
       </div>
       <div class="feat">
-        <div class="feat-icon">🌙</div>
+        <div class="feat-icon">
+          <svg class="ic"><use href="#ic-moon"/></svg>
+        </div>
         <div>
           <h3>Dark Mode</h3>
-          <p>Nyaman dipakai siang & malam, preferensi tersimpan</p>
+          <p>Nyaman dipakai siang &amp; malam, preferensi tersimpan</p>
         </div>
       </div>
     </div>
@@ -150,18 +347,40 @@
         <span class="prog-lbl" id="progLbl">Mulai dengan upload foto</span>
       </div>
       <div class="nav-r">
-        <button class="btn-icon" onclick="openHistory()" title="Riwayat">📋</button>
-        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
-        <button class="btn-ghost" onclick="goToLanding()" style="font-size:12px;padding:7px 13px">← Beranda</button>
+        <button class="btn-icon" onclick="openHistory()" title="Riwayat">
+          <svg class="ic"><use href="#ic-history"/></svg>
+        </button>
+        <button class="theme-btn" onclick="toggleTheme()" title="Ganti tema" id="themeBtnApp">
+          <svg class="ic"><use href="#ic-moon" id="themeIconApp"/></svg>
+        </button>
+        <button class="btn-ghost btn-back" onclick="goToLanding()">
+          <svg class="ic"><use href="#ic-arrow-l"/></svg>
+          <span class="btn-label">Beranda</span>
+        </button>
       </div>
     </nav>
 
+    <!-- Mobile tab switcher -->
+    <div class="mobile-tabs" id="mobileTabs">
+      <button class="mobile-tab active" id="tabForm" onclick="switchMobileTab('form')">
+        <svg class="ic"><use href="#ic-settings"/></svg>
+        Form
+      </button>
+      <button class="mobile-tab" id="tabResult" onclick="switchMobileTab('result')">
+        <svg class="ic"><use href="#ic-sparkle"/></svg>
+        Hasil
+      </button>
+    </div>
+
     <div class="app-body">
       <!-- LEFT -->
-      <div class="left-col">
+      <div class="left-col" id="leftCol">
 
         <div class="sec config-sec">
-          <div class="sec-lbl">⚙️ Pengaturan AI</div>
+          <div class="sec-lbl">
+            <svg class="ic"><use href="#ic-settings"/></svg>
+            Pengaturan AI
+          </div>
           <div class="fg" style="display:none;">
             <div class="api-key-header">
               <label class="fl">OpenRouter API Key *</label>
@@ -169,7 +388,9 @@
             </div>
             <div class="password-wrapper">
               <input type="password" class="fi" id="apiKeyInput" placeholder="sk-or-v1-xxxxxxxxxx">
-              <button type="button" class="btn-toggle-pw" onclick="togglePasswordVisibility()">👁️</button>
+              <button type="button" class="btn-toggle-pw" onclick="togglePasswordVisibility()">
+                <svg class="ic" id="eyeIcon"><use href="#ic-eye"/></svg>
+              </button>
             </div>
           </div>
           <div class="fg" style="margin-bottom:0">
@@ -189,7 +410,9 @@
           <div class="sec-lbl"><span class="sec-num">1</span>Foto Produk</div>
           <div class="upload-zone" id="uploadZone">
             <input type="file" accept="image/*" id="fileInput" onchange="handleFile(event)">
-            <div style="font-size:2rem;margin-bottom:.6rem">📸</div>
+            <div class="upload-icon">
+              <svg class="ic"><use href="#ic-upload"/></svg>
+            </div>
             <p><strong>Klik atau seret foto</strong> ke sini<br><span style="font-size:11px">JPG, PNG, WebP · maks
                 5MB</span></p>
           </div>
@@ -203,8 +426,10 @@
             </div>
             <input type="file" accept="image/*" id="fileHidden" onchange="handleFile(event)" style="display:none">
           </div>
-          <div class="tips-chip" id="tipsChip">💡 Foto dengan pencahayaan baik & latar polos menghasilkan caption lebih
-            akurat.</div>
+          <div class="tips-chip" id="tipsChip">
+            <svg class="ic ic-sm"><use href="#ic-bulb"/></svg>
+            Foto dengan pencahayaan baik &amp; latar polos menghasilkan caption lebih akurat.
+          </div>
           <div class="photo-analysis" id="photoAnalysis"></div>
         </div>
 
@@ -260,19 +485,23 @@
           <div class="plat-grid">
             <label class="plat-lbl p-ig on" id="lbl-ig">
               <input type="checkbox" value="instagram" checked onchange="togglePlat('lbl-ig',this)">
-              <span class="pd"></span>Instagram
+              <svg class="ic ic-sm plat-icon"><use href="#ic-instagram"/></svg>
+              Instagram
             </label>
             <label class="plat-lbl p-top on" id="lbl-top">
               <input type="checkbox" value="tokopedia" checked onchange="togglePlat('lbl-top',this)">
-              <span class="pd"></span>Tokopedia
+              <svg class="ic ic-sm plat-icon"><use href="#ic-shop"/></svg>
+              Tokopedia
             </label>
             <label class="plat-lbl p-sho on" id="lbl-sho">
               <input type="checkbox" value="shopee" checked onchange="togglePlat('lbl-sho',this)">
-              <span class="pd"></span>Shopee
+              <svg class="ic ic-sm plat-icon"><use href="#ic-shop"/></svg>
+              Shopee
             </label>
             <label class="plat-lbl p-tik" id="lbl-tik">
               <input type="checkbox" value="tiktok" onchange="togglePlat('lbl-tik',this)">
-              <span class="pd"></span>TikTok
+              <svg class="ic ic-sm plat-icon"><use href="#ic-play"/></svg>
+              TikTok
             </label>
           </div>
           <label class="ab-row">
@@ -284,7 +513,8 @@
         <div class="sec" style="border-bottom:none">
           <button class="btn-gen" id="btnGen" onclick="generate()">
             <div class="spin" id="spinner"></div>
-            <span id="btnTxt">✨ Generate Konten Sekarang</span>
+            <svg class="ic ic-gen" id="genIcon"><use href="#ic-zap"/></svg>
+            <span id="btnTxt">Generate Konten Sekarang</span>
           </button>
           <p style="font-size:10.5px;color:var(--ink3);text-align:center;margin-top:7px;line-height:1.5">Hasil muncul di
             panel kanan · Tersimpan otomatis ke riwayat</p>
@@ -294,25 +524,39 @@
       <!-- RIGHT -->
       <div class="right-col" id="rightCol">
         <div class="empty-state" id="emptyState">
-          <div class="ei">🪄</div>
+          <div class="ei">
+            <svg class="ic ic-xl"><use href="#ic-magic"/></svg>
+          </div>
           <h2>Siap Generate Konten</h2>
           <p>Isi info produk di kiri,<br>lalu klik <strong>Generate Konten Sekarang</strong>.</p>
         </div>
 
         <div class="export-bar" id="exportBar">
           <div class="export-info">
-            <h4>Konten siap! 🎉</h4>
+            <h4>
+              <svg class="ic ic-sm" style="color:#16a34a"><use href="#ic-check"/></svg>
+              Konten siap!
+            </h4>
             <p id="exportMeta"></p>
           </div>
           <div class="export-btns">
-            <button class="btn-sm" onclick="exportTxt()">⬇ Export .txt</button>
-            <button class="btn-sm accent" onclick="generate()">↺ Ulang</button>
+            <button class="btn-sm" onclick="exportTxt()">
+              <svg class="ic ic-sm"><use href="#ic-download"/></svg>
+              Export .txt
+            </button>
+            <button class="btn-sm accent" onclick="generate()">
+              <svg class="ic ic-sm"><use href="#ic-repeat"/></svg>
+              Ulang
+            </button>
           </div>
         </div>
 
         <div class="price-card" id="priceCard">
           <div class="price-head">
-            <div class="price-eyebrow">💰 Rekomendasi Harga Jual</div>
+            <div class="price-eyebrow">
+              <svg class="ic ic-sm" style="opacity:.6"><use href="#ic-coin"/></svg>
+              Rekomendasi Harga Jual
+            </div>
             <span class="price-badge">AI Pricing</span>
           </div>
           <div class="price-grid">
@@ -321,7 +565,10 @@
               <div class="price-col-val pv-min" id="priceMin">—</div>
             </div>
             <div class="price-col">
-              <div class="price-col-lbl">⭐ Ideal</div>
+              <div class="price-col-lbl">
+                <svg class="ic ic-sm" style="color:var(--gold)"><use href="#ic-star"/></svg>
+                Ideal
+              </div>
               <div class="price-col-val pv-rec" id="priceRec">—</div>
             </div>
             <div class="price-col">
@@ -341,10 +588,18 @@
   <div id="historyModal">
     <div class="hist-box">
       <div class="hist-head">
-        <h3>📋 Riwayat Generate</h3>
+        <h3>
+          <svg class="ic ic-sm"><use href="#ic-history"/></svg>
+          Riwayat Generate
+        </h3>
         <div style="display:flex;gap:6px;align-items:center">
-          <button class="btn-sm accent" onclick="clearHistory()">Hapus Semua</button>
-          <button class="btn-icon" onclick="closeHistory()">✕</button>
+          <button class="btn-sm accent" onclick="clearHistory()">
+            <svg class="ic ic-sm"><use href="#ic-trash"/></svg>
+            Hapus Semua
+          </button>
+          <button class="btn-icon" onclick="closeHistory()">
+            <svg class="ic"><use href="#ic-close"/></svg>
+          </button>
         </div>
       </div>
       <div class="hist-body" id="historyList"></div>
@@ -354,6 +609,59 @@
   <div class="toast" id="toast"></div>
 
   <script src="snapsell.js"></script>
+  <script>
+    // Update theme icon on load and toggle
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const href = isDark ? '#ic-sun' : '#ic-moon';
+      document.querySelectorAll('[id^="themeIcon"]').forEach(el => el.setAttribute('href', href));
+    }
+    // Watch for theme changes
+    const _origToggleTheme = window.toggleTheme;
+    window.toggleTheme = function() {
+      if (_origToggleTheme) _origToggleTheme();
+      setTimeout(updateThemeIcons, 50);
+    };
+    document.addEventListener('DOMContentLoaded', updateThemeIcons);
+
+    // Toggle eye icon for password
+    const _origTogglePw = window.togglePasswordVisibility;
+    window.togglePasswordVisibility = function() {
+      if (_origTogglePw) _origTogglePw();
+      const inp = document.getElementById('apiKeyInput');
+      const icon = document.getElementById('eyeIcon');
+      if (inp && icon) {
+        icon.querySelector('use').setAttribute('href', inp.type === 'password' ? '#ic-eye' : '#ic-eye-off');
+      }
+    };
+
+    // Mobile tab switching
+    function switchMobileTab(tab) {
+      const leftCol = document.getElementById('leftCol');
+      const rightCol = document.getElementById('rightCol');
+      const tabForm = document.getElementById('tabForm');
+      const tabResult = document.getElementById('tabResult');
+      if (tab === 'form') {
+        leftCol.style.display = 'flex';
+        rightCol.style.display = 'none';
+        tabForm.classList.add('active');
+        tabResult.classList.remove('active');
+      } else {
+        leftCol.style.display = 'none';
+        rightCol.style.display = 'flex';
+        tabForm.classList.remove('active');
+        tabResult.classList.add('active');
+      }
+    }
+
+    // Auto-switch to result tab on mobile after generate
+    const _origGenerate = window.generate;
+    // Hook after generate completes on mobile
+    const mq = window.matchMedia('(max-width: 900px)');
+    document.addEventListener('snapsell:generated', () => {
+      if (mq.matches) switchMobileTab('result');
+    });
+  </script>
 </body>
 
 </html>
